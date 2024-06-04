@@ -27,7 +27,7 @@ class Label(models.Model):
         return self.name
 
 
-# Object classe 
+# Object classes 
 
 class Unit(models.Model):
 
@@ -40,7 +40,7 @@ class Unit(models.Model):
 class Ingredient(models.Model):
 
     name = models.CharField(max_length=128)
-    unit = models.ForeignKey(Unit, on_delete=models.CASCADE) # inutile d'ajouter related name au Unit
+    units = models.ManyToManyField(Unit) # inutile d'ajouter related name au Unit
     months = models.ManyToManyField(SeasonalMonth, related_name='months')
 
     def __str__(self):
@@ -72,6 +72,7 @@ class RecipeIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name="recipe_ingredients") #au cas ou on cherche les recettes associées à un ingrédient
 
     quantity = models.DecimalField(max_digits=8, decimal_places=2)
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
 
 
 class Event(models.Model):
@@ -86,5 +87,3 @@ class EventRecipe(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="event_recipes")
 
     guest_number =  models.IntegerField(validators=[MinValueValidator(1)])
-
-
