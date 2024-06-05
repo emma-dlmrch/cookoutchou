@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
+from django.urls import path, include
+from cookoutchou.views import *
+
+router = routers.SimpleRouter()
+router.register('ingredient', IngredientViewSet, basename = 'ingredient')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]

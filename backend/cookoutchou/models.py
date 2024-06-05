@@ -41,7 +41,7 @@ class Ingredient(models.Model):
 
     name = models.CharField(max_length=128)
     units = models.ManyToManyField(Unit) # inutile d'ajouter related name au Unit
-    months = models.ManyToManyField(SeasonalMonth, related_name='months')
+    months = models.ManyToManyField(SeasonalMonth, related_name='months', blank=True, null=True)
 
     def __str__(self):
         return self.name
