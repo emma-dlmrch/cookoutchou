@@ -9,3 +9,22 @@ export interface Event {
     recipes: Array<Recipe>
 }
 
+
+export interface Unit {
+    name : string
+}
+
+
+export interface SeasonalMonth {
+    name : string
+}
+
+
+
+export interface Ingredient {
+    name : string,
+    slug : string,
+    units? : Array<Unit>,
+    months? : Array<SeasonalMonth>
+}
+

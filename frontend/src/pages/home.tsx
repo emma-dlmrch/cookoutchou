@@ -15,6 +15,9 @@ function Homepage() {
         <li>
           <Link to="/events">All events</Link>
         </li>
+        <li>
+          <Link to="/ingredients">All ingredients</Link>
+        </li>
       </ul>
     </div>
   );
