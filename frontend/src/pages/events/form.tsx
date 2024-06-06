@@ -1,10 +1,10 @@
-import React from 'react';
-import '../App.css';
-
+import React from "react";
 
 function EventForm() {
   return (
-    <div><h1>EventForm !</h1></div>
+    <div>
+      <h1>EventForm !</h1>
+    </div>
   );
 }
 

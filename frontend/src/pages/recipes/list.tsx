@@ -1,5 +1,4 @@
 import React from "react";
-import "../App.css";
 
 import { Recipe } from "../../models";
 import RecipeDetails from "./details";
