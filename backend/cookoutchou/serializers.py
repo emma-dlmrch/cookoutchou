@@ -48,7 +48,7 @@ class IngredientDetailSerializer(ModelSerializer):
         fields = ['id', 'name', 'months', 'units']
 
 
-##Recipe
+##Recipe admin
 
 class RecipeIngredientSerializer(ModelSerializer):
 
@@ -80,3 +80,9 @@ class RecipeDetailSerializer(ModelSerializer):
                   'cooking_time', 'labels', 'moments', 'author', 'recipe_ingredients']
 
 
+##Recipe-ingredient admin
+class RecipeIngredientAdminSerializer(ModelSerializer):
+
+    class Meta:
+        model = RecipeIngredient
+        fields = ['id', 'quantity', 'unit', 'ingredient', 'recipe']

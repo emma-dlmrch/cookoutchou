@@ -36,3 +36,12 @@ class RecipeViewSet(MultipleSerializerMixin, ModelViewSet):
     def get_queryset(self):
         queryset = Recipe.objects.all()
         return queryset
+    
+#Ajouter/supprimer/modifier un ingrédient à une recette
+class RecipeIngredientViewSet(ModelViewSet):
+
+    serializer_class = RecipeIngredientAdminSerializer
+
+    def get_queryset(self):
+        queryset = RecipeIngredient.objects.all()
+        return queryset

@@ -23,6 +23,7 @@ from cookoutchou.views import *
 router = routers.SimpleRouter()
 router.register('ingredient', IngredientViewSet, basename = 'ingredient')
 router.register('recipe', RecipeViewSet, basename = 'recipe')
+router.register('recipe-ingredient', RecipeIngredientViewSet, basename = 'recipe-ingredient')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
