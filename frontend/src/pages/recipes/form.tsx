@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Recipe, RecipeCreationFirstStep, Moment } from "../../models";
+import { Recipe, RecipeCreationFirstStep, Moment, IngredientInRecipe } from "../../models";
 import "../../styles/recipes.css";
 
 function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreationFirstStep) => void }) {
@@ -29,13 +29,17 @@ function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreation
         if (!isValid()) {
             return;
         }
-
-        callback({
+        const newRecipe: RecipeCreationFirstStep = {
             name,
             nbPeople,
-            preparationTime,
-            cookingTime,
-        });
+        };
+        if (preparationTime) {
+            newRecipe.preparationTime = preparationTime;
+        }
+        if (preparationTime) {
+            newRecipe.cookingTime = cookingTime;
+        }
+        callback(newRecipe);
     };
 
     return (
@@ -73,9 +77,7 @@ function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreation
                         step="1"
                         name="preparationTime"
                         id="preparationTime"
-                        required
-                        placeholder={preparationTime.toString()}
-                        defaultValue={preparationTime}
+                        placeholder={"20 minutes"}
                         onChange={(e) => setPreparationTime(parseInt(e.target.value, 10))}
                     />
                 </p>
@@ -86,9 +88,7 @@ function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreation
                         step="1"
                         name="cookingTime"
                         id="cookingTime"
-                        required
-                        placeholder={cookingTime.toString()}
-                        defaultValue={cookingTime}
+                        placeholder={"20 minutes"}
                         onChange={(e) => setCookingTime(parseInt(e.target.value, 10))}
                     />
                 </p>
@@ -101,6 +101,14 @@ function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreation
     );
 }
 
+function ShowIngredientInRecipe({ ingredient }: { ingredient: IngredientInRecipe }) {
+    return (
+        <>
+            {ingredient.name} : {ingredient.quantity} {ingredient.unit}
+        </>
+    );
+}
+
 function RecipeEditionForm({ recipe }: { recipe: Recipe }) {
     return (
         <div className="recipe-edition">
@@ -110,23 +118,46 @@ function RecipeEditionForm({ recipe }: { recipe: Recipe }) {
             </div>
             <div>
                 <h2>Ingrédients</h2>
+                <ul>
+                    {recipe.ingredients &&
+                        recipe.ingredients.length > 0 &&
+                        recipe.ingredients.map((ingredient) => {
+                            return (
+                                <li>
+                                    <ShowIngredientInRecipe ingredient={ingredient} />
+                                </li>
+                            );
+                        })}
+                </ul>
             </div>
             <div>
                 <h2>Informations</h2>
                 <p>Nombre de personnes : {recipe.nbPeople}</p>
-                <p>Durée de préparation : {recipe.preparationTime}</p>
-                <p>Durée de cuisson : {recipe.cookingTime}</p>
+                <p>Durée de préparation : {recipe.preparationTime ? recipe.preparationTime : "non précisée"}</p>
+                <p>Durée de cuisson : {recipe.cookingTime ? recipe.cookingTime : "non précisée"}</p>
             </div>
-            <div></div>
+            <div className="recipe-instructions">
+                <h2>Instructions</h2>
+                <ol>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                    <li>Instruction 1</li>
+                </ol>
+            </div>
         </div>
     );
 }
 
 function RecipeForm({ create = true, recipeId = 0 }: { create?: boolean; recipeId?: number }) {
-    const [recipe, setRecipe] = useState<Recipe>({ name: "", nbPeople: 3 });
-    const [step, setStep] = useState<number>(create ? 1 : 2);
-
-    const title = create ? "Créer une recette" : "Modifier une recette";
     const moments: Array<Moment> = [
         {
             name: "Petit-déjeuner",
@@ -141,6 +172,14 @@ function RecipeForm({ create = true, recipeId = 0 }: { create?: boolean; recipeI
             name: "Dîner",
         },
     ];
+    const ingredients = [
+        { slug: "patate", name: "Patate", quantity: 1, unit: "kg" },
+        { slug: "huile-dolive", name: "Huile d'olive", quantity: 5, unit: "cuillère(s) à soupe" },
+        { slug: "gros-sel", name: "Gros sel", quantity: 4, unit: "poignées" },
+    ];
+
+    const [recipe, setRecipe] = useState<Recipe>({ name: "", nbPeople: 3, ingredients });
+    const [step, setStep] = useState<number>(create ? 1 : 2);
 
     const firstStep = (newRecipe: RecipeCreationFirstStep) => {
         setRecipe({
@@ -150,6 +189,7 @@ function RecipeForm({ create = true, recipeId = 0 }: { create?: boolean; recipeI
         setStep(2);
     };
 
+    const title = create ? "Créer une recette" : "Modifier une recette";
     return (
         <div>
             <h1>{title}</h1>

@@ -4,7 +4,10 @@ export interface RecipeCreationFirstStep {
     cookingTime?: number;
     nbPeople: number;
 }
-export interface Recipe extends RecipeCreationFirstStep {}
+
+export interface Recipe extends RecipeCreationFirstStep {
+    ingredients?: Array<IngredientInRecipe>;
+}
 
 export interface Event {
     name: string;
@@ -30,4 +33,9 @@ export interface Ingredient {
     slug?: string;
     units?: Array<Unit>;
     months?: Array<SeasonalMonth>;
+}
+
+export interface IngredientInRecipe extends Ingredient {
+    quantity: number;
+    unit: string;
 }

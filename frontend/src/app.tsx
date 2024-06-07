@@ -5,7 +5,7 @@ import Router from "./router";
 import Header from "./layout/header";
 import Footer from "./layout/footer";
 
-import "./App.css";
+import "./styles/app.css";
 
 function App() {
     return (
