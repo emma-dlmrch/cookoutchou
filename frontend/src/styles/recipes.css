@@ -1,0 +1,8 @@
+.recipe-edition {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.recipe-title {
+    grid-column: 1 / -1;
+}

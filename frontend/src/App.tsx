@@ -8,15 +8,15 @@ import Footer from "./layout/footer";
 import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Header />
-        <Router></Router>
-        <Footer />
-      </BrowserRouter>
-    </div>
-  );
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Header />
+                <Router></Router>
+                <Footer />
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;
