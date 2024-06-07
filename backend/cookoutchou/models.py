@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from authentication.models import User
 
 
@@ -7,6 +7,11 @@ from authentication.models import User
 class SeasonalMonth(models.Model):
 
     name = models.CharField(max_length=20)
+    number = models.PositiveIntegerField(default=1,
+    validators=[
+            MaxValueValidator(12),
+            MinValueValidator(1)
+        ])
 
     def __str__(self):
         return self.name
@@ -41,7 +46,7 @@ class Ingredient(models.Model):
 
     name = models.CharField(max_length=128)
     units = models.ManyToManyField(Unit) # inutile d'ajouter related name au Unit
-    months = models.ManyToManyField(SeasonalMonth, related_name='months', blank=True, null=True)
+    months = models.ManyToManyField(SeasonalMonth, related_name='months', blank=True)
 
     def __str__(self):
         return self.name
@@ -52,12 +57,12 @@ class Recipe(models.Model):
     name = models.CharField(max_length=128)
     default_guest_number = models.IntegerField(validators=[MinValueValidator(1)])
     instructions = models.TextField(blank=True)
-    preparation_time = models.IntegerField() # en minutes
-    cooking_time = models.IntegerField() # en minutes
+    preparation_time = models.IntegerField(null=True, blank=True) # en minutes
+    cooking_time = models.IntegerField(null=True, blank=True) # en minutes
     #liste labels
-    labels = models.ManyToManyField(Label, related_name='labels')
+    labels = models.ManyToManyField(Label, related_name='labels', blank=True)
     #liste moments du repas
-    moments = models.ManyToManyField(Moment, related_name='moments')
+    moments = models.ManyToManyField(Moment, related_name='moments', blank=True)
 
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
 

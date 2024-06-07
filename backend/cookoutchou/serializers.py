@@ -6,13 +6,77 @@ class UnitSerializer(ModelSerializer):
 
     class Meta:
         model = Unit
-        fields = ['id','name']
+        fields = ['id', 'name']
+
+class MonthSerializer(ModelSerializer):
+
+    class Meta:
+        model = SeasonalMonth
+        fields = ['id', 'name']
 
 
-class IngredientSerializer(ModelSerializer):
+class MomentSerializer(ModelSerializer):
+    
+    class Meta:
+        model = Moment
+        fields = ['id', 'name']
 
-    units = UnitSerializer(many=True, read_only=True)
+
+class LabelSerializer(ModelSerializer):
+    
+    class Meta:
+        model = Label
+        fields = ['id', 'name']
+
+
+
+##Ingredient
+class IngredientListSerializer(ModelSerializer):
     
     class Meta:
         model = Ingredient
-        fields = ['id','name', 'months', 'units']
+        fields = ['id', 'name']
+
+
+class IngredientDetailSerializer(ModelSerializer):
+
+    units = UnitSerializer(many=True, read_only=True)
+    months = MonthSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Ingredient
+        fields = ['id', 'name', 'months', 'units']
+
+
+##Recipe
+
+class RecipeIngredientSerializer(ModelSerializer):
+
+    ingredient = IngredientListSerializer()
+    unit = UnitSerializer()
+
+    class Meta:
+        model = RecipeIngredient
+        fields = ['id', 'quantity', 'unit', 'ingredient']
+
+
+class RecipeListSerializer(ModelSerializer):
+    
+    class Meta:
+        model = Recipe
+        fields = ['id', 'name', 'default_guest_number', 'author','preparation_time', 
+                  'cooking_time'] #author temp le temps qu'on active token
+
+
+class RecipeDetailSerializer(ModelSerializer):
+
+    labels = LabelSerializer(many=True)
+    moments = MomentSerializer(many=True)
+    recipe_ingredients = RecipeIngredientSerializer(many=True)
+    
+    class Meta:
+        model = Recipe
+        fields = ['id', 'default_guest_number', 'instructions', 'preparation_time', 
+                  'cooking_time', 'labels', 'moments', 'author', 'recipe_ingredients']
+
+
