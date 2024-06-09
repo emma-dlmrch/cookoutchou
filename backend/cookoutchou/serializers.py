@@ -65,7 +65,7 @@ class RecipeListSerializer(ModelSerializer):
     class Meta:
         model = Recipe
         fields = ['id', 'name', 'default_guest_number', 'author','preparation_time', 
-                  'cooking_time'] #author temp le temps qu'on active token
+                  'cooking_time', 'moments'] #author temp le temps qu'on active token #moments à supprimer?
 
 
 class RecipeDetailSerializer(ModelSerializer):
@@ -76,7 +76,7 @@ class RecipeDetailSerializer(ModelSerializer):
     
     class Meta:
         model = Recipe
-        fields = ['id', 'default_guest_number', 'instructions', 'preparation_time', 
+        fields = ['id', 'name', 'default_guest_number', 'instructions', 'preparation_time', 
                   'cooking_time', 'labels', 'moments', 'author', 'recipe_ingredients']
 
 
@@ -86,3 +86,5 @@ class RecipeIngredientAdminSerializer(ModelSerializer):
     class Meta:
         model = RecipeIngredient
         fields = ['id', 'quantity', 'unit', 'ingredient', 'recipe']
+
+##Event
