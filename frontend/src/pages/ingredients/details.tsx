@@ -39,6 +39,7 @@ function IngredientDetails({ ingredientId }: { ingredientId?: number }) {
       name: "January",
     };
     const patate: Ingredient = {
+      id: 1,
       name: "Patate",
       slug: "patate",
       units: [kg, g],

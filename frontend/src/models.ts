@@ -22,8 +22,9 @@ export interface SeasonalMonth {
 
 
 export interface Ingredient {
+    id : number,
     name : string,
-    slug : string,
+    slug? : string,
     units? : Array<Unit>,
     months? : Array<SeasonalMonth>
 }
