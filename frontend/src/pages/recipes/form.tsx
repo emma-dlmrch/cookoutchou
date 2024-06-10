@@ -173,9 +173,9 @@ function RecipeForm({ create = true, recipeId = 0 }: { create?: boolean; recipeI
         },
     ];
     const ingredients = [
-        { slug: "patate", name: "Patate", quantity: 1, unit: "kg" },
-        { slug: "huile-dolive", name: "Huile d'olive", quantity: 5, unit: "cuillère(s) à soupe" },
-        { slug: "gros-sel", name: "Gros sel", quantity: 4, unit: "poignées" },
+        { id: 1, slug: "patate", name: "Patate", quantity: 1, unit: "kg" },
+        { id: 2, slug: "huile-dolive", name: "Huile d'olive", quantity: 5, unit: "cuillère(s) à soupe" },
+        { id: 3, slug: "gros-sel", name: "Gros sel", quantity: 4, unit: "poignées" },
     ];
 
     const [recipe, setRecipe] = useState<Recipe>({ name: "", nbPeople: 3, ingredients });
