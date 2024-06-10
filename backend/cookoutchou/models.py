@@ -83,12 +83,19 @@ class RecipeIngredient(models.Model):
 class Event(models.Model):
 
     name = models.CharField(max_length=128)
-    date = models.DateField()
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+
+class Meal(models.Model):
+
+    date = models.DateTimeField(blank=True, null=True)
+    name = models.CharField(default="Repas par défaut", max_length=128)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_meals")
 
 # Objet intermédiaire associant recette et le nombre de personnes à un événement
-class EventRecipe(models.Model):
+class EventMealRecipe(models.Model):
     
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_recipes")
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name="meal_recipes")
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="event_recipes")
 
     guest_number =  models.IntegerField(validators=[MinValueValidator(1)])
