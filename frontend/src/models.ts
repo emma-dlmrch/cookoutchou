@@ -1,31 +1,41 @@
-export interface Recipe {
-    name : string,
-    duration : number
+export interface RecipeCreationFirstStep {
+    name: string;
+    preparationTime?: number;
+    cookingTime?: number;
+    nbPeople: number;
+}
+
+export interface Recipe extends RecipeCreationFirstStep {
+    ingredients?: Array<IngredientInRecipe>;
 }
 
 export interface Event {
-    name : string,
-    date : string,
-    recipes: Array<Recipe>
+    name: string;
+    date: string;
+    recipes: Array<Recipe>;
 }
-
 
 export interface Unit {
-    name : string
+    name: string;
 }
 
+export interface Moment {
+    name: string;
+}
 
 export interface SeasonalMonth {
-    name : string
+    name: string;
 }
-
-
 
 export interface Ingredient {
-    id : number,
-    name : string,
-    slug? : string,
-    units? : Array<Unit>,
-    months? : Array<SeasonalMonth>
+    id: number;
+    name: string;
+    slug?: string;
+    units?: Array<Unit>;
+    months?: Array<SeasonalMonth>;
 }
 
+export interface IngredientInRecipe extends Ingredient {
+    quantity: number;
+    unit: string;
+}

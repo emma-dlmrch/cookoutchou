@@ -1,0 +1,37 @@
+.App {
+    width: 800px;
+    text-align: center;
+    margin: auto;
+}
+
+.App ul,
+.App ol {
+    text-align: left;
+}
+
+.App-link {
+    color: #04627c;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 500px;
+    text-align: center;
+
+    background-color: white;
+    color: #04627c;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
