@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 import { Recipe, RecipeCreationFirstStep, Moment, IngredientInRecipe } from "../../models";
+import RecipeDataService from "../../services/recipe_service";
+
 import "../../styles/recipes.css";
 
 function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreationFirstStep) => void }) {

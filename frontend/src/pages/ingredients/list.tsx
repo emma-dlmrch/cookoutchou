@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Ingredient } from "../../models";
 import IngredientDetails from "./details";
 
-import IngredientDataService from "../../service/ingredient_service";
+import IngredientDataService from "../../services/ingredient_service";
 
 function IngredientsList() {
     const [ingredients, setIngredients] = useState<Array<Ingredient>>([]);
