@@ -64,7 +64,7 @@ class Recipe(models.Model):
     #liste moments du repas
     moments = models.ManyToManyField(Moment, related_name='moments', blank=True)
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes', null=True, blank=True)
 
 
     def __str__(self):

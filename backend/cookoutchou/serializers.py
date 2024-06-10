@@ -60,15 +60,20 @@ class RecipeIngredientSerializer(ModelSerializer):
         fields = ['id', 'quantity', 'unit', 'ingredient']
 
 
-class RecipeListSerializer(ModelSerializer):
-    
+class AbstractRecipeSerializer(ModelSerializer):
+    preparationTime = serializers.IntegerField(source="preparation_time")
+    cookingTime = serializers.IntegerField(source="cooking_time")
+    nbGuests = serializers.IntegerField(source="default_guest_number")
+
+class RecipeListSerializer(AbstractRecipeSerializer):
+
     class Meta:
         model = Recipe
-        fields = ['id', 'name', 'default_guest_number', 'author','preparation_time', 
-                  'cooking_time', 'moments'] #author temp le temps qu'on active token #moments à supprimer?
+        fields = ['id', 'name', 'nbGuests', 'preparationTime', 
+                  'cookingTime', 'moments'] #author temp le temps qu'on active token #moments à supprimer?
 
 
-class RecipeDetailSerializer(ModelSerializer):
+class RecipeDetailSerializer(AbstractRecipeSerializer):
 
     labels = LabelSerializer(many=True)
     moments = MomentSerializer(many=True)
@@ -76,8 +81,8 @@ class RecipeDetailSerializer(ModelSerializer):
     
     class Meta:
         model = Recipe
-        fields = ['id', 'name', 'default_guest_number', 'instructions', 'preparation_time', 
-                  'cooking_time', 'labels', 'moments', 'author', 'recipe_ingredients']
+        fields = ['id', 'name', 'nbGuests', 'instructions', 'preparationTime', 
+                  'cookingTime', 'labels', 'moments', 'recipe_ingredients']
 
 
 ##Recipe-ingredient admin

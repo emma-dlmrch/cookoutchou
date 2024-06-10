@@ -2,7 +2,7 @@ export interface RecipeCreationFirstStep {
     name: string;
     preparationTime?: number;
     cookingTime?: number;
-    nbPeople: number;
+    nbGuests: number;
 }
 
 export interface Recipe extends RecipeCreationFirstStep {

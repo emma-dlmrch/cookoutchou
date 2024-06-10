@@ -11,7 +11,7 @@ function RecipeDetails({ data }: { data: Recipe }) {
             <br />
             cookingTime: {data.cookingTime}
             <br />
-            nbPeople: {data.nbPeople}
+            nbGuests: {data.nbGuests}
         </div>
     );
 }

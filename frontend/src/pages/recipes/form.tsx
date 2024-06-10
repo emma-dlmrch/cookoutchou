@@ -7,7 +7,7 @@ import "../../styles/recipes.css";
 
 function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreationFirstStep) => void }) {
     const [name, setName] = useState<string>("");
-    const [nbPeople, setNbPeople] = useState<number>(3);
+    const [nbGuests, setNbGuests] = useState<number>(3);
     const [preparationTime, setPreparationTime] = useState<number>(0);
     const [cookingTime, setCookingTime] = useState<number>(0);
 
@@ -18,7 +18,7 @@ function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreation
             setErrorMessage("Un nom est obligatoire pour créer une recette !");
             return false;
         }
-        if (nbPeople <= 0) {
+        if (nbGuests <= 0) {
             setErrorMessage("Le nombre de personnes doit être supérieur à 0.");
             return false;
         }
@@ -33,7 +33,7 @@ function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreation
         }
         const newRecipe: RecipeCreationFirstStep = {
             name,
-            nbPeople,
+            nbGuests,
         };
         if (preparationTime) {
             newRecipe.preparationTime = preparationTime;
@@ -67,9 +67,9 @@ function RecipeGeneralInfoForm({ callback }: { callback: (recipe: RecipeCreation
                         name="nb_people"
                         id="nb_people"
                         required
-                        placeholder={nbPeople.toString()}
-                        defaultValue={nbPeople}
-                        onChange={(e) => setNbPeople(parseInt(e.target.value, 10))}
+                        placeholder={nbGuests.toString()}
+                        defaultValue={nbGuests}
+                        onChange={(e) => setNbGuests(parseInt(e.target.value, 10))}
                     />
                 </p>
                 <p>
@@ -134,7 +134,7 @@ function RecipeEditionForm({ recipe }: { recipe: Recipe }) {
             </div>
             <div>
                 <h2>Informations</h2>
-                <p>Nombre de personnes : {recipe.nbPeople}</p>
+                <p>Nombre de personnes : {recipe.nbGuests}</p>
                 <p>Durée de préparation : {recipe.preparationTime ? recipe.preparationTime : "non précisée"}</p>
                 <p>Durée de cuisson : {recipe.cookingTime ? recipe.cookingTime : "non précisée"}</p>
             </div>
@@ -180,15 +180,21 @@ function RecipeForm({ create = true, recipeId = 0 }: { create?: boolean; recipeI
         { id: 3, slug: "gros-sel", name: "Gros sel", quantity: 4, unit: "poignées" },
     ];
 
-    const [recipe, setRecipe] = useState<Recipe>({ name: "", nbPeople: 3, ingredients });
+    const [recipe, setRecipe] = useState<Recipe>({ name: "", nbGuests: 3, ingredients });
     const [step, setStep] = useState<number>(create ? 1 : 2);
 
     const firstStep = (newRecipe: RecipeCreationFirstStep) => {
-        setRecipe({
-            ...recipe,
-            ...newRecipe,
-        });
-        setStep(2);
+        RecipeDataService.create(newRecipe)
+            .then((response: any) => {
+                setRecipe({
+                    ...recipe,
+                    ...newRecipe,
+                });
+                setStep(2);
+            })
+            .catch((e: Error) => {
+                console.log(e);
+            });
     };
 
     const title = create ? "Créer une recette" : "Modifier une recette";
