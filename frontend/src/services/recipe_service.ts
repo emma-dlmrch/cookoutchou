@@ -6,7 +6,7 @@ class RecipeDataService {
         return http.get<Array<Recipe>>("/recipe/");
     }
 
-    get(id: string) {
+    get(id: number) {
         return http.get<Recipe>(`/recipe/${id}`);
     }
 
@@ -14,11 +14,11 @@ class RecipeDataService {
         return http.post<RecipeCreationFirstStep>("/recipe/", data);
     }
 
-    update(data: Recipe, id: any) {
+    update(data: Recipe, id: number) {
         return http.patch<any>(`/recipe/${id}`, data);
     }
 
-    delete(id: any) {
+    delete(id: number) {
         return http.delete<any>(`/recipe/${id}`);
     }
 }

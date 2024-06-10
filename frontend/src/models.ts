@@ -6,6 +6,7 @@ export interface RecipeCreationFirstStep {
 }
 
 export interface Recipe extends RecipeCreationFirstStep {
+    id: number;
     ingredients?: Array<IngredientInRecipe>;
 }
 

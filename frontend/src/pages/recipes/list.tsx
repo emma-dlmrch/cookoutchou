@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Recipe } from "../../models";
-import RecipeDetails from "./details";
 import RecipeDataService from "../../services/recipe_service";
+
+import "../../styles/recipes.css";
 
 function RecipesList() {
     const [recipes, setRecipes] = useState<Array<Recipe>>([]);
@@ -29,13 +30,20 @@ function RecipesList() {
             <p>
                 <Link to="/recipes/create">Créer une nouvelle recette</Link>
             </p>
-            {recipes.map((recipe) => {
-                return (
-                    <p>
-                        {recipe.name} pour {recipe.nbGuests} invité(e)s
-                    </p>
-                );
-            })}
+            <div className="recipes-list">
+                {recipes.map((recipe) => {
+                    return (
+                        <div>
+                            <p>
+                                <Link to={"/recipes/edit/" + recipe.id}>
+                                    <strong>{recipe.name}</strong> <br />
+                                    pour {recipe.nbGuests} invité(e)s
+                                </Link>
+                            </p>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 }

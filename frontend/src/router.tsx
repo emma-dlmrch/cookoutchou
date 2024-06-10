@@ -8,14 +8,16 @@ import IngredientsList from "./pages/ingredients/list";
 import IngredientDetails from "./pages/ingredients/details";
 
 import ErrorPage from "./components/error";
-import RecipeForm from "./pages/recipes/form";
+import RecipeCreateForm from "./pages/recipes/create_form";
+import RecipeEditForm from "./pages/recipes/edit_form";
 
 function Router() {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/recipes" element={<RecipesList />} />
-            <Route path="/recipes/create" element={<RecipeForm create={true} />} />
+            <Route path="/recipes/create" element={<RecipeCreateForm />} />
+            <Route path="/recipes/edit/:recipeId" element={<RecipeEditForm />} />
             <Route path="/events" element={<EventsList />} />
             <Route path="/ingredients" element={<IngredientsList />} />
             <Route path="/ingredient/:ingredientId" element={<IngredientDetails />} />
