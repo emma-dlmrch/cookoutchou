@@ -93,3 +93,35 @@ class RecipeIngredientAdminSerializer(ModelSerializer):
         fields = ['id', 'quantity', 'unit', 'ingredient', 'recipe']
 
 ##Event
+class AbstractEventSerializer(ModelSerializer):
+
+    startDate = serializers.DateField(source="start_date")
+    endDate = serializers.DateField(source="end_date")
+
+
+class EventListSerializer(AbstractEventSerializer):
+    
+    class Meta:
+        model = Event
+        fields = ['id', 'name', 'startDate', 'endDate']
+
+
+class EventDetailSerializer(AbstractEventSerializer):
+
+    meals = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Event
+        fields = ['id', 'name', 'startDate', 'endDate', 'meals']
+
+    def get_meal(self, instance):
+        queryset = instance.event_meals.all()
+        serializer = MealSerializer(queryset, many=True)
+        return serializer.data
+    
+##Meal
+class MealSerializer(ModelSerializer):
+    
+    class Meta:
+        model = Meal
+        fields = ['id', 'name', 'date']

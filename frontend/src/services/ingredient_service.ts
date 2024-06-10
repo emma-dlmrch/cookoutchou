@@ -11,7 +11,7 @@ class IngredientDataService {
     }
 
     create(data: Ingredient) {
-        return http.post<Ingredient>("/ingredient", data);
+        return http.post<Ingredient>("/ingredient/", data);
     }
 
     update(data: Ingredient, id: any) {

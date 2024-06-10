@@ -16,7 +16,6 @@ function IngredientsList() {
         IngredientDataService.getAll()
             .then((response: any) => {
                 setIngredients(response.data.results);
-                console.log(response.data);
             })
             .catch((e: Error) => {
                 console.log(e);

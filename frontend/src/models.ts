@@ -10,9 +10,19 @@ export interface Recipe extends RecipeCreationFirstStep {
 }
 
 export interface Event {
+    id:number;
     name: string;
-    date: string;
-    recipes: Array<Recipe>;
+    startDate: Date;
+    endDate: Date;
+    meals?: Array<Meal>;
+}
+
+export interface Meal {
+    id:number;
+    name: string;
+    date: Date;
+    event?: Event;
+    recipes?: Array<Recipe>;
 }
 
 export interface Unit {

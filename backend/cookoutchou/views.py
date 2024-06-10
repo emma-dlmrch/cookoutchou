@@ -45,3 +45,12 @@ class RecipeIngredientViewSet(ModelViewSet):
     def get_queryset(self):
         queryset = RecipeIngredient.objects.all()
         return queryset
+    
+class EventViewSet(MultipleSerializerMixin, ModelViewSet):
+
+    detail_serializer_class = EventListSerializer ##pas de détail pour le moment
+    serializer_class = EventListSerializer
+
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        return queryset

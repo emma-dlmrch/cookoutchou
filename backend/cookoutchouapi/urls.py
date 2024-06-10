@@ -24,6 +24,7 @@ router = routers.SimpleRouter()
 router.register('ingredient', IngredientViewSet, basename = 'ingredient')
 router.register('recipe', RecipeViewSet, basename = 'recipe')
 router.register('recipe-ingredient', RecipeIngredientViewSet, basename = 'recipe-ingredient')
+router.register('event', EventViewSet, basename = 'event')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
