@@ -7,11 +7,11 @@ export interface RecipeCreationFirstStep {
 
 export interface Recipe extends RecipeCreationFirstStep {
     id: number;
-    ingredients?: Array<IngredientInRecipe>;
+    ingredients?: Array<RecipeIngredient>;
 }
 
 export interface Event {
-    id:number;
+    id: number;
     name: string;
     startDate: Date;
     endDate: Date;
@@ -19,7 +19,7 @@ export interface Event {
 }
 
 export interface Meal {
-    id:number;
+    id: number;
     name: string;
     date: Date;
     event?: Event;
@@ -27,6 +27,7 @@ export interface Meal {
 }
 
 export interface Unit {
+    id: number;
     name: string;
 }
 
@@ -35,6 +36,7 @@ export interface Moment {
 }
 
 export interface SeasonalMonth {
+    id: number;
     name: string;
 }
 
@@ -46,7 +48,16 @@ export interface Ingredient {
     months?: Array<SeasonalMonth>;
 }
 
-export interface IngredientInRecipe extends Ingredient {
+export interface RecipeIngredient {
+    id?: number;
+    recipe: Recipe;
+    ingredient: Ingredient;
     quantity: number;
-    unit: string;
+    unit: Unit;
+}
+export interface NewRecipeIngredient {
+    recipe: number;
+    ingredient: number;
+    quantity: number;
+    unit: number;
 }

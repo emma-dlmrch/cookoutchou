@@ -30,12 +30,15 @@ function IngredientDetails({ ingredientId }: { ingredientId?: number }) {
 
     const getData = () => {
         const kg: Unit = {
+            id: 1,
             name: "kg",
         };
         const g: Unit = {
+            id: 1,
             name: "g",
         };
-        const january: Unit = {
+        const january: SeasonalMonth = {
+            id: 1,
             name: "January",
         };
         const patate: Ingredient = {

@@ -77,12 +77,12 @@ class RecipeDetailSerializer(AbstractRecipeSerializer):
 
     labels = LabelSerializer(many=True)
     moments = MomentSerializer(many=True)
-    recipe_ingredients = RecipeIngredientSerializer(many=True)
+    ingredients = RecipeIngredientSerializer(source="recipe_ingredients", many=True)
     
     class Meta:
         model = Recipe
         fields = ['id', 'name', 'nbGuests', 'instructions', 'preparationTime', 
-                  'cookingTime', 'labels', 'moments', 'recipe_ingredients']
+                  'cookingTime', 'labels', 'moments', 'ingredients']
 
 
 ##Recipe-ingredient admin
