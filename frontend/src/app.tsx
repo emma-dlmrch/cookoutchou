@@ -6,6 +6,7 @@ import Header from "./layout/header";
 import Footer from "./layout/footer";
 
 import "./styles/app.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
     return (

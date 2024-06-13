@@ -1,5 +1,5 @@
 import http from "../http_common";
-import { Recipe, RecipeCreationFirstStep, NewRecipeIngredient } from "../models";
+import { Recipe, RecipeCreationFirstStep, RecipeIngredient, NewRecipeIngredient } from "../models";
 
 class RecipeDataService {
     getAll() {
@@ -24,6 +24,9 @@ class RecipeDataService {
 
     addIngredient(recipeIngredient: NewRecipeIngredient) {
         return http.post<any>("/recipe-ingredient/", recipeIngredient);
+    }
+    removeIngredient(recipeIngredient: RecipeIngredient) {
+        return http.delete<any>(`/recipe-ingredient/${recipeIngredient.id}`);
     }
 }
 

@@ -18,10 +18,9 @@ class MultipleSerializerMixin:
     
 
 
-class IngredientViewSet(MultipleSerializerMixin, ModelViewSet):
+class IngredientViewSet(ModelViewSet):
 
-    detail_serializer_class = IngredientDetailSerializer
-    serializer_class = IngredientListSerializer
+    serializer_class = IngredientDetailSerializer
 
     def get_queryset(self):
         queryset = Ingredient.objects.all()

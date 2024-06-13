@@ -42,3 +42,8 @@
 .recipes-list > div:hover {
     background-color: #efefef;
 }
+
+.alert {
+    color: darkred;
+    font-style: italic;
+}

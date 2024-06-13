@@ -1,5 +1,5 @@
 import http from "../http_common";
-import { Ingredient } from "../models"
+import { Ingredient } from "../models";
 
 class IngredientDataService {
     getAll() {

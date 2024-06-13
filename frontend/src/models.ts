@@ -55,9 +55,11 @@ export interface RecipeIngredient {
     quantity: number;
     unit: Unit;
 }
-export interface NewRecipeIngredient {
-    recipe: number;
+export interface RecipeIngredientParameters {
     ingredient: number;
     quantity: number;
     unit: number;
+}
+export interface NewRecipeIngredient extends RecipeIngredientParameters {
+    recipe: number;
 }
